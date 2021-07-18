@@ -1,0 +1,109 @@
+#include<iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node* link;
+};
+
+struct Node* top;
+
+void push(int a)
+{
+    struct Node* temp;
+    temp = new Node();
+    
+    if(!temp)
+    {
+        cout<<"Satck overflow\n";
+        exit(1);
+    }
+    
+    temp->data=a;
+    
+    temp->link=top;
+    
+    top=temp;
+}
+
+int isEmpty()
+{
+    return top==NULL;
+}
+
+int peek()
+{
+    if(!isEmpty())
+        return top->data;
+    else 
+        exit(1);
+}
+
+void pop()
+{
+    struct Node* temp;
+    
+    if(top==NULL)
+    {
+        cout<<"Stack Underflow\n";
+    }
+    
+    else
+    {
+    
+    temp=top;
+    
+    top=top->link;
+    
+    temp->link=NULL;
+    
+    free(temp);
+    
+    cout<<"poped\n";
+    
+    }
+}
+
+void display()
+{
+    struct Node* temp;
+    
+    if(top==NULL)
+    {
+        cout<<"Stack underflow\n";
+        exit(1);
+    }
+    else
+    {
+        temp=top;
+        
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<endl;
+            
+            temp=temp->link;
+        }
+    }
+    
+}
+
+int main()
+{
+    push(11);
+    push(12);
+    push(13);
+    push(14);
+    push(20);
+    display();
+    pop();
+    cout<<peek()<<endl;
+    display();
+    pop();
+    pop();
+    pop();
+    pop();
+    display();
+    push(1);
+    cout<<peek();
+}
